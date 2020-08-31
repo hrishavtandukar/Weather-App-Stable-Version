@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+<!-- {{ api }} -->
+<!-- <br>
+<br> -->
+<br>
+<!-- <br> -->
+{% if zipcode %}
+	{{ zipcode }}
+{% endif %}
+
+<!-- If API exists then do all thesestuff-->
+{% if api %}
+
+	{% if api == "Error in calling API...." %}
+		Error has occured !!! Please try again...
+
+	{% else %}
+		<div class="jumbotron {{ category_color }}">
+			<h1 class="my-4">Weather of USA</h1>
+			<h3 class="display-6">Air quality: {{ api.0.Category.Name }}</h1>
+
+
+				<p>{{ category_description }}</p>
+				<!-- {% if api.0.Category.Name == "Good" %}
+					<p>(0-50) Air quality is considered satisfactory.</p>
+
+				{% elif api.0.Category.Name == "Moderate" %}
+					<p>(51-100) Air quality is acceptable.</p>
+
+				{% elif api.0.Category.Name == "Unhealthy for Sensitive Groups" %}
+					<p>(101-150) Although general public is not likely to be affected at this AQI range, people with lung disease, elderly people and children are at a greatest risk point.</p>
+
+				{% elif api.0.Category.Name == "Unhealthy" %}
+					<p>(151-200) Everyone may begin to experience health effects.</p>
+
+				{% elif api.0.Category.Name == "Very Unhealthy" %}
+					<p>(201-300) Health alert.</p>
+
+				{% elif api.0.Category.Name == "Hazardous" %}
+					<p>(300-500) Health warning of emergency condition.</p>
+				{% endif %} -->
+
+
+			<p class="lead"><b>Area Name: {{ api.0.ReportingArea }} <br> Category: {{ api.0.AQI }} </b></p>
+		</div>
+		 
+		
+	{% endif %}
+
+{% endif %}
+<!--else do not do anything-->
+{% if districtnepal %}
+	{{ districtnepal }}
+{% endif %}
+<!-- {{ api_nepal }} -->
+<!-- <br> -->
+<!-- {{ api_nepal.weather.10 }} -->
+<!-- If API exists then do all thesestuff-->
+{% if api %}
+
+	{% if api == "Error in calling API...." %}
+		Error has occured !!! Please try again...
+
+	{% else %}
+		<div class="jumbotron {{ category_color }}">
+			<h1 class="my-4">Weather of Nepal</h1>
+			<h3 class="display-8">Area Name: {{ api_nepal.weather.10.place }}</h1>
+			<p class="lead"><b>Maximum Temperature: {{ api_nepal.weather.10.max }} <br> Minimum Temperature: {{ api_nepal.weather.10.min }} </b></p>
+			<!-- <p>It uses utility classes for typography and spacing to space content out within the larger container.</p> -->
+		</div>
+		
+	{% endif %}
+
+{% endif %}
+<!--else do not do anything-->
+
+{% endblock %}
